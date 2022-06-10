@@ -6,6 +6,13 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #1d1d1d;
+    color: white;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: bold;
   }
 `;
 
