@@ -17,7 +17,6 @@ const StyledSquare = styled.div`
   background-color: #358765;
   width: 100%;
   height: 100%;
-  //border-radius: 2px;
 `;
 
 const StyledPiece = styled.div`

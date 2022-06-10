@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Gamesquare from "./Gamesquare";
 
+//move this to its own file
 const INITIAL_BOARD = [
   [
     { state: "e", possibleMove: false },
@@ -87,6 +88,8 @@ const INITIAL_BOARD = [
 
 const Gameboard = () => {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
+  //create a game log that explains what happened on each turn
+
   return (
     <Container>
       <StyledBoard columns={gameState.length}>
@@ -105,19 +108,20 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
-  width: 100%;
+  margin: 16px 0;
 `;
 
 const StyledBoard = styled.div`
   display: grid;
   grid-template-columns: repeat(${(p) => p.columns || 1}, 1fr);
-  width: 720px;
-  height: 720px;
+  max-width: 720px;
+  max-height: 720px;
+  width: 100%;
   background-color: #363241;
   gap: 4px;
   padding: 12px;
   border-radius: 4px;
+  aspect-ratio: 1 / 1;
 `;
 
 export default Gameboard;
