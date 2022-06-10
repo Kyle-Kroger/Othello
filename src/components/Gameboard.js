@@ -90,8 +90,10 @@ const Gameboard = () => {
   return (
     <Container>
       <StyledBoard columns={gameState.length}>
-        {gameState.map((row) =>
-          row.map((col) => <Gamesquare state={col.state} />)
+        {gameState.map((row, rowI) =>
+          row.map((col, colI) => (
+            <Gamesquare state={col.state} x={rowI} y={colI} />
+          ))
         )}
       </StyledBoard>
     </Container>
@@ -112,9 +114,10 @@ const StyledBoard = styled.div`
   grid-template-columns: repeat(${(p) => p.columns || 1}, 1fr);
   width: 720px;
   height: 720px;
-  background-color: aliceblue;
-  gap: 2px;
-  padding: 2px;
+  background-color: #363241;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 4px;
 `;
 
 export default Gameboard;
