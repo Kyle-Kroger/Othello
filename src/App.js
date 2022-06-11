@@ -20,8 +20,8 @@ const Heading = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 15vh;
-  background-color: #5a5368;
+  height: 12vh;
+  background-color: var(--color-highlight);
 `;
 
 export default App;

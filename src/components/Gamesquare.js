@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const Gamesquare = (props) => {
-  const { state, possibleMove, x, y, placePiece, player } = props;
+  const { state, possibleMove, x, y, placePiece, player, toFlip } = props;
 
   const handleClick = () => {
     placePiece(x, y, player);
+    console.log(toFlip);
   };
 
   return (
@@ -18,11 +19,13 @@ const StyledSquare = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #358765;
+  background-color: ${(p) =>
+    p.enabled ? "var(--color-highlight)" : "var(--color-primary)"};
   width: 100%;
   height: 100%;
   //pointer-events: ${(p) => (p.enabled ? "auto" : "none")};
   cursor: pointer;
+  border-radius: 2px;
 `;
 
 const StyledPiece = styled.div`
