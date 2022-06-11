@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 const Gamesquare = (props) => {
-  const { state, possibleMove, x, y } = props;
+  const { state, possibleMove, x, y, placePiece, player } = props;
+
+  const handleClick = () => {
+    placePiece(x, y, player);
+  };
+
   return (
-    <StyledSquare>
+    <StyledSquare onClick={handleClick} enabled={possibleMove}>
       <StyledPiece color={state} />
-      {/* {state}|{x},{y} */}
     </StyledSquare>
   );
 };
@@ -17,7 +21,8 @@ const StyledSquare = styled.div`
   background-color: #358765;
   width: 100%;
   height: 100%;
-  //border-radius: 2px;
+  //pointer-events: ${(p) => (p.enabled ? "auto" : "none")};
+  cursor: pointer;
 `;
 
 const StyledPiece = styled.div`

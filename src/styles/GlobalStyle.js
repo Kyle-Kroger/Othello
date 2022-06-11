@@ -5,6 +5,12 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
 
   html {
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+    
     font-family: Arial, Helvetica, sans-serif;
     background-color: #212121;
     color: white;
