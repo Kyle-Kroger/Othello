@@ -90,12 +90,25 @@ const Gameboard = () => {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
   //create a game log that explains what happened on each turn
 
+  const placePiece = (x, y, color) => {
+    setGameState((prevState) => {
+      let newState = [...prevState];
+      newState[x][y] = { ...newState[x][y], state: color };
+      return newState;
+    });
+  };
+
   return (
     <Container>
       <StyledBoard columns={gameState.length}>
         {gameState.map((row, rowI) =>
           row.map((col, colI) => (
-            <Gamesquare state={col.state} x={rowI} y={colI} />
+            <Gamesquare
+              state={col.state}
+              x={rowI}
+              y={colI}
+              placePiece={placePiece}
+            />
           ))
         )}
       </StyledBoard>
