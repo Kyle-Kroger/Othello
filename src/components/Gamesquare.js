@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const Gamesquare = (props) => {
-  const { state, possibleMove, x, y, placePiece } = props;
+  const { state, possibleMove, x, y, placePiece, player } = props;
 
   const handleClick = () => {
-    placePiece(x, y, "w");
+    placePiece(x, y, player);
   };
 
   return (

@@ -88,6 +88,7 @@ const INITIAL_BOARD = [
 
 const Gameboard = () => {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
+  const [player, setPlayer] = useState("b");
   //create a game log that explains what happened on each turn
 
   const placePiece = (x, y, color) => {
@@ -96,6 +97,14 @@ const Gameboard = () => {
       newState[x][y] = { ...newState[x][y], state: color };
       return newState;
     });
+    //Check if player as any moves before setting new player
+    setPlayer((prevState) => {
+      return prevState === "w" ? "b" : "w";
+    });
+  };
+
+  const validMoves = (gameboard, color) => {
+    //connect color given with other color somehow
   };
 
   return (
@@ -108,6 +117,7 @@ const Gameboard = () => {
               x={rowI}
               y={colI}
               placePiece={placePiece}
+              player={player}
             />
           ))
         )}
