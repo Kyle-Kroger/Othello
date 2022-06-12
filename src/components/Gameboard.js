@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Gamesquare from "./Gamesquare";
 
@@ -91,19 +91,7 @@ const Gameboard = () => {
   const [player, setPlayer] = useState("b");
   //create a game log that explains what happened on each turn
 
-  const placePiece = (x, y, color) => {
-    setGameState((prevState) => {
-      let newState = [...prevState];
-      newState[x][y] = { ...newState[x][y], state: color };
-      return newState;
-    });
-    //Check if player as any moves before setting new player
-    setPlayer((prevState) => {
-      return prevState === "w" ? "b" : "w";
-    });
-  };
-
-  const validMoves = (gameboard, color) => {
+  const validMoves = useCallback((gameboard, color) => {
     const newGameboard = [...gameboard].map((row, rowI) => {
       return row.map((col, colI) => {
         if (col.state === "e") {
@@ -136,6 +124,22 @@ const Gameboard = () => {
 
     setGameState(newGameboard);
     console.log(newGameboard);
+  }, []);
+
+  useEffect(() => {
+    validMoves(gameState, player);
+  }, [validMoves, gameState, player]);
+
+  const placePiece = (x, y, color) => {
+    setGameState((prevState) => {
+      let newState = [...prevState];
+      newState[x][y] = { ...newState[x][y], state: color };
+      return newState;
+    });
+    //Check if player as any moves before setting new player
+    setPlayer((prevState) => {
+      return prevState === "w" ? "b" : "w";
+    });
   };
 
   const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
