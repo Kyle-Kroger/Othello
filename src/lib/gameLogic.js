@@ -49,6 +49,9 @@ const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
       if (gameboard[currX][currY].state === opposite) {
         rowValidated.push({ x: currX, y: currY });
       }
+      if (gameboard[currX][currY].state === "e") {
+        break;
+      }
       if (gameboard[currX][currY].state === color) {
         if (rowValidated.length > 0) {
           validated = [...validated, ...rowValidated];
