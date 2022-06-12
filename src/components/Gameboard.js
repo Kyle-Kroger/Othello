@@ -9,10 +9,12 @@ const Gameboard = () => {
   const [player, setPlayer] = useState("b");
   //create a game log that explains what happened on each turn
 
+  //Within a callback so that it can be used within the useEffect safely
   const memoValidMoves = useCallback((gameboard, color) => {
     return validMoves(gameboard, color);
   }, []);
 
+  //State relies on prevState so need to use the functional form of setState
   useEffect(() => {
     setGameState((prevState) => memoValidMoves(prevState, player));
   }, [memoValidMoves, player]);
@@ -23,7 +25,7 @@ const Gameboard = () => {
       newState[x][y] = { ...newState[x][y], state: color };
       return newState;
     });
-    //Check if player as any moves before setting new player
+    //Still need to check if player has any moves before setting new player
     setPlayer((prevState) => {
       return prevState === "w" ? "b" : "w";
     });
