@@ -29,7 +29,19 @@ const Gameboard = () => {
     });
   };
 
-  const flipPieces = (gameboard, arrPieces) => {};
+  //when a square is clicked on the gameboard flips sandwiched pieces
+  const flipPieces = (color, arrPieces) => {
+    setGameState((prevState) => {
+      let newState = [...prevState];
+      for (let piece of arrPieces) {
+        newState[piece.x][piece.y] = {
+          ...newState[piece.x][piece.y],
+          state: color,
+        };
+      }
+      return newState;
+    });
+  };
 
   return (
     <Container>
@@ -43,6 +55,7 @@ const Gameboard = () => {
               x={rowI}
               y={colI}
               placePiece={placePiece}
+              flipPieces={flipPieces}
               player={player}
               key={`${rowI},${colI}`}
             />
