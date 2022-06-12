@@ -31,14 +31,12 @@ export const validMoves = (gameboard, color) => {
 const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
   const opposite = color === "w" ? "b" : "w";
   let validated = [];
-  let valid = false;
 
   for (let oppAdjacent of oppAdjacentArr) {
     let { x: currX, y: currY } = oppAdjacent;
     const xDir = oppAdjacent.x - x;
     const yDir = oppAdjacent.y - y;
     let rowValidated = [];
-    let rowValid = false;
 
     while (
       currX >= 0 &&
@@ -46,12 +44,15 @@ const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
       currY >= 0 &&
       currY < gameboard.length
     ) {
+      //If the game piece is of the opposite color add it to row validated temporarly.
       if (gameboard[currX][currY].state === opposite) {
         rowValidated.push({ x: currX, y: currY });
       }
+      //required so that something is not valid if there is an empty space in the sandwich
       if (gameboard[currX][currY].state === "e") {
         break;
       }
+      //Only add the row if its greater than one
       if (gameboard[currX][currY].state === color) {
         if (rowValidated.length > 0) {
           validated = [...validated, ...rowValidated];
@@ -83,6 +84,7 @@ const checkAdjacentSquares = (gameboard, color, x, y) => {
   ];
   const oppositePieces = [];
   for (let square of surrounding) {
+    //Make sure we don't go outside the bounds of the gameboard array
     if (
       square.x < 0 ||
       square.y < 0 ||
