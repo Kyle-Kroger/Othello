@@ -30,12 +30,15 @@ export const validMoves = (gameboard, color) => {
 
 const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
   const opposite = color === "w" ? "b" : "w";
+  let validated = [];
+  let valid = false;
+
   for (let oppAdjacent of oppAdjacentArr) {
     let { x: currX, y: currY } = oppAdjacent;
     const xDir = oppAdjacent.x - x;
     const yDir = oppAdjacent.y - y;
-    let validated = [];
-    let valid = false;
+    let rowValidated = [];
+    let rowValid = false;
 
     while (
       currX >= 0 &&
@@ -44,23 +47,23 @@ const validateMove = (gameboard, color, x, y, oppAdjacentArr) => {
       currY < gameboard.length
     ) {
       if (gameboard[currX][currY].state === opposite) {
-        validated.push({ x: currX, y: currY });
+        rowValidated.push({ x: currX, y: currY });
       }
       if (gameboard[currX][currY].state === color) {
-        valid = validated.length > 0;
+        if (rowValidated.length > 0) {
+          validated = [...validated, ...rowValidated];
+        }
         break;
       }
 
       currX += xDir;
       currY += yDir;
     }
-
-    if (valid) {
-      return validated;
-    }
-
-    return [];
   }
+  if (validated.length > 0) {
+    return validated;
+  }
+  return [];
 };
 
 const checkAdjacentSquares = (gameboard, color, x, y) => {
