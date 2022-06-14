@@ -26,7 +26,6 @@ const StyledSquare = styled.div`
   height: 100%;
   pointer-events: ${(p) => (p.enabled ? "auto" : "none")};
   cursor: pointer;
-  border-radius: 2px;
 `;
 
 const StyledPiece = styled.div`
