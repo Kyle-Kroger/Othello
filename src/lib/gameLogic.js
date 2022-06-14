@@ -99,3 +99,16 @@ const checkAdjacentSquares = (gameboard, color, x, y) => {
   }
   return oppositePieces;
 };
+
+export const hasValidMove = (gameboard) => {
+  for (let row of gameboard) {
+    for (let col of row) {
+      if (col.possibleMove) {
+        //if there is a possible move return true
+        return true;
+      }
+    }
+  }
+  //if no possible move is found return false
+  return false;
+};

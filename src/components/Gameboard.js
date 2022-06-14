@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Gamesquare from "./Gamesquare";
-import { validMoves } from "../lib/gameLogic";
+import { validMoves, hasValidMove } from "../lib/gameLogic";
 import INITIAL_BOARD from "../lib/initialState";
 
 const Gameboard = () => {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
   const [player, setPlayer] = useState("b");
+  const [lastHadValidMove, setLastHadValidMove] = useState(true);
   //create a game log that explains what happened on each turn
 
   //Within a callback so that it can be used within the useEffect safely
@@ -14,10 +15,34 @@ const Gameboard = () => {
     return validMoves(gameboard, color);
   }, []);
 
+  const memoHasValidMove = useCallback((gameboard) => {
+    return hasValidMove(gameboard);
+  }, []);
+
   //State relies on prevState so need to use the functional form of setState
   useEffect(() => {
     setGameState((prevState) => memoValidMoves(prevState, player));
   }, [memoValidMoves, player]);
+
+  //checks if the current player has a turn
+  useEffect(() => {
+    //check if the current player has valid moves if the last player had a valid move
+    console.log(lastHadValidMove);
+    if (lastHadValidMove) {
+      setLastHadValidMove(memoHasValidMove(gameState));
+    } else {
+      if (!memoHasValidMove(gameState)) {
+        //both players have no moves
+        console.log("game has ended");
+      } else {
+        //other player has a move, give them the turn
+        setPlayer((prevState) => {
+          return prevState === "w" ? "b" : "w";
+        });
+        setLastHadValidMove(true);
+      }
+    }
+  }, [gameState, lastHadValidMove, memoHasValidMove]);
 
   const placePiece = (x, y, color) => {
     setGameState((prevState) => {
@@ -64,13 +89,6 @@ const Gameboard = () => {
           ))
         )}
       </StyledBoard>
-      <button
-        onClick={() => {
-          memoValidMoves(gameState, player);
-        }}
-      >
-        Test
-      </button>
     </Container>
   );
 };
@@ -91,7 +109,7 @@ const StyledBoard = styled.div`
   width: 100%;
   background-color: #111111;
   gap: 4px;
-  padding: 12px;
+  padding: 8px;
   aspect-ratio: 1 / 1;
 `;
 
