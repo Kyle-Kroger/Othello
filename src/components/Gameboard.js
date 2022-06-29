@@ -2,12 +2,21 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Gamesquare from "./Gamesquare";
 import { validMoves, hasValidMove } from "../lib/gameLogic";
-import INITIAL_BOARD from "../lib/initialState";
 
 const Gameboard = (props) => {
-  const [gameState, setGameState] = useState(INITIAL_BOARD);
-  const [player, setPlayer] = useState("b");
-  const [lastHadValidMove, setLastHadValidMove] = useState(true);
+  const {
+    gameState,
+    setGameState,
+    player,
+    setPlayer,
+    lastHadValidMove,
+    setLastHadValidMove,
+  } = props;
+
+  // const [gameState, setGameState] = useState(INITIAL_BOARD);
+  // const [player, setPlayer] = useState("b");
+  // const [lastHadValidMove, setLastHadValidMove] = useState(true);
+
   //create a game log that explains what happened on each turn
 
   //Within a callback so that it can be used within the useEffect safely
@@ -22,7 +31,7 @@ const Gameboard = (props) => {
   //State relies on prevState so need to use the functional form of setState
   useEffect(() => {
     setGameState((prevState) => memoValidMoves(prevState, player));
-  }, [memoValidMoves, player]);
+  }, [memoValidMoves, player, setGameState]);
 
   //checks if the current player has a turn
   useEffect(() => {
@@ -42,7 +51,13 @@ const Gameboard = (props) => {
         setLastHadValidMove(true);
       }
     }
-  }, [gameState, lastHadValidMove, memoHasValidMove]);
+  }, [
+    gameState,
+    lastHadValidMove,
+    memoHasValidMove,
+    setPlayer,
+    setLastHadValidMove,
+  ]);
 
   const placePiece = (x, y, color) => {
     setGameState((prevState) => {

@@ -1,16 +1,29 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { Gameboard } from "./components";
+import INITIAL_BOARD from "./lib/initialState";
 import { GlobalStyle } from "./styles";
 // import "./App.css";
 
 function App() {
+  const [gameState, setGameState] = useState(INITIAL_BOARD);
+  const [player, setPlayer] = useState("b");
+  const [lastHadValidMove, setLastHadValidMove] = useState(true);
+
   return (
     <>
       <GlobalStyle />
       <Heading>
         <h1>Play Othello</h1>
       </Heading>
-      <Gameboard />
+      <Gameboard
+        gameState={gameState}
+        setGameState={setGameState}
+        player={player}
+        setPlayer={setPlayer}
+        lastHadValidMove={lastHadValidMove}
+        setLastHadValidMove={setLastHadValidMove}
+      />
     </>
   );
 }
