@@ -21,7 +21,9 @@ const Heading = styled.div`
   justify-content: center;
   width: 100%;
   height: 12vh;
-  background-color: var(--color-highlight);
+  background-color: var(--color-highlight-800);
 `;
+
+const StyledMain = styled.main``;
 
 export default App;

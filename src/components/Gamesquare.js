@@ -21,7 +21,7 @@ const StyledSquare = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${(p) =>
-    p.enabled ? "var(--color-highlight)" : "var(--color-primary)"};
+    p.enabled ? "var(--color-highlight-800)" : "var(--color-primary)"};
   width: 100%;
   height: 100%;
   pointer-events: ${(p) => (p.enabled ? "auto" : "none")};

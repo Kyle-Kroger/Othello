@@ -4,7 +4,7 @@ import Gamesquare from "./Gamesquare";
 import { validMoves, hasValidMove } from "../lib/gameLogic";
 import INITIAL_BOARD from "../lib/initialState";
 
-const Gameboard = () => {
+const Gameboard = (props) => {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
   const [player, setPlayer] = useState("b");
   const [lastHadValidMove, setLastHadValidMove] = useState(true);
