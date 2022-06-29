@@ -13,10 +13,6 @@ const Gameboard = (props) => {
     setLastHadValidMove,
   } = props;
 
-  // const [gameState, setGameState] = useState(INITIAL_BOARD);
-  // const [player, setPlayer] = useState("b");
-  // const [lastHadValidMove, setLastHadValidMove] = useState(true);
-
   //create a game log that explains what happened on each turn
 
   //Within a callback so that it can be used within the useEffect safely

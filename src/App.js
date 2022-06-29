@@ -1,15 +1,24 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Gameboard } from "./components";
 import INITIAL_BOARD from "./lib/initialState";
 import { GlobalStyle } from "./styles";
 import { countPieces } from "./lib/gameLogic";
+import Scoreboard from "./components/Scoreboard";
 // import "./App.css";
 
 function App() {
   const [gameState, setGameState] = useState(INITIAL_BOARD);
   const [player, setPlayer] = useState("b");
   const [lastHadValidMove, setLastHadValidMove] = useState(true);
+  const [blackCount, setBlackCount] = useState(0);
+  const [whiteCount, setWhiteCount] = useState(0);
+
+  useEffect(() => {
+    const { bCount, wCount } = countPieces(gameState);
+    setBlackCount(bCount);
+    setWhiteCount(wCount);
+  }, [gameState]);
 
   return (
     <>
@@ -17,6 +26,11 @@ function App() {
       <Heading>
         <h1>Play Othello</h1>
       </Heading>
+      <Scoreboard
+        blackCount={blackCount}
+        whiteCount={whiteCount}
+        currPlayer={player}
+      />
       <Gameboard
         gameState={gameState}
         setGameState={setGameState}
