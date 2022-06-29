@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Gameboard } from "./components";
 import INITIAL_BOARD from "./lib/initialState";
 import { GlobalStyle } from "./styles";
+import { countPieces } from "./lib/gameLogic";
 // import "./App.css";
 
 function App() {

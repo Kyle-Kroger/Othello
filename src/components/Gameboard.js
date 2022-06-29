@@ -36,7 +36,6 @@ const Gameboard = (props) => {
   //checks if the current player has a turn
   useEffect(() => {
     //check if the current player has valid moves if the last player had a valid move
-    console.log(lastHadValidMove);
     if (lastHadValidMove) {
       setLastHadValidMove(memoHasValidMove(gameState));
     } else {

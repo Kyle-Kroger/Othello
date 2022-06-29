@@ -112,3 +112,21 @@ export const hasValidMove = (gameboard) => {
   //if no possible move is found return false
   return false;
 };
+
+export const countPieces = (gameboard) => {
+  let [bCount, wCount] = [0, 0];
+
+  //loop through gameboard and count
+  for (let row of gameboard) {
+    for (let col of row) {
+      if (col.state === "b") {
+        bCount++;
+      }
+      if (col.state === "w") {
+        wCount++;
+      }
+    }
+  }
+
+  return { bCount, wCount };
+};
