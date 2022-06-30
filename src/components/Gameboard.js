@@ -2,12 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Gamesquare from "./Gamesquare";
 import { validMoves, hasValidMove } from "../lib/gameLogic";
-import INITIAL_BOARD from "../lib/initialState";
 
-const Gameboard = () => {
-  const [gameState, setGameState] = useState(INITIAL_BOARD);
-  const [player, setPlayer] = useState("b");
-  const [lastHadValidMove, setLastHadValidMove] = useState(true);
+const Gameboard = (props) => {
+  const {
+    gameState,
+    setGameState,
+    player,
+    setPlayer,
+    lastHadValidMove,
+    setLastHadValidMove,
+    getCords,
+  } = props;
+
   //create a game log that explains what happened on each turn
 
   //Within a callback so that it can be used within the useEffect safely
@@ -22,12 +28,11 @@ const Gameboard = () => {
   //State relies on prevState so need to use the functional form of setState
   useEffect(() => {
     setGameState((prevState) => memoValidMoves(prevState, player));
-  }, [memoValidMoves, player]);
+  }, [memoValidMoves, player, setGameState]);
 
   //checks if the current player has a turn
   useEffect(() => {
     //check if the current player has valid moves if the last player had a valid move
-    console.log(lastHadValidMove);
     if (lastHadValidMove) {
       setLastHadValidMove(memoHasValidMove(gameState));
     } else {
@@ -42,7 +47,13 @@ const Gameboard = () => {
         setLastHadValidMove(true);
       }
     }
-  }, [gameState, lastHadValidMove, memoHasValidMove]);
+  }, [
+    gameState,
+    lastHadValidMove,
+    memoHasValidMove,
+    setPlayer,
+    setLastHadValidMove,
+  ]);
 
   const placePiece = (x, y, color) => {
     setGameState((prevState) => {
@@ -70,25 +81,46 @@ const Gameboard = () => {
     });
   };
 
+  const genRankLabels = (length) => {
+    return [...Array(length)].map((x, i) => {
+      return <RankLabel key={i + 1}>{i + 1}</RankLabel>;
+    });
+  };
+
+  const genFileLabels = (length) => {
+    return [...Array(length)].map((x, i) => {
+      return (
+        <FileLabel key={String.fromCharCode(97 + i)}>
+          {String.fromCharCode(65 + i)}
+        </FileLabel>
+      );
+    });
+  };
+
   return (
     <Container>
-      <StyledBoard columns={gameState.length}>
-        {gameState.map((row, rowI) =>
-          row.map((col, colI) => (
-            <Gamesquare
-              state={col.state}
-              possibleMove={col.possibleMove}
-              toFlip={col.toFlip}
-              x={rowI}
-              y={colI}
-              placePiece={placePiece}
-              flipPieces={flipPieces}
-              player={player}
-              key={`${rowI},${colI}`}
-            />
-          ))
-        )}
-      </StyledBoard>
+      <FileLabels>{genFileLabels(gameState.length)}</FileLabels>
+      <FlexWrapper>
+        <RankLabels>{genRankLabels(gameState.length)}</RankLabels>
+        <StyledBoard columns={gameState.length}>
+          {gameState.map((row, rowI) =>
+            row.map((col, colI) => (
+              <Gamesquare
+                state={col.state}
+                possibleMove={col.possibleMove}
+                toFlip={col.toFlip}
+                x={rowI}
+                y={colI}
+                placePiece={placePiece}
+                flipPieces={flipPieces}
+                player={player}
+                getCords={getCords}
+                key={`${rowI},${colI}`}
+              />
+            ))
+          )}
+        </StyledBoard>
+      </FlexWrapper>
     </Container>
   );
 };
@@ -96,20 +128,53 @@ const Gameboard = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 8px 0;
+  width: 70%;
+  max-width: 660px;
+  max-height: 660px;
+  font-size: var(--spacing-lg);
+  text-align: center;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const RankLabels = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 720px;
+  padding: 6px 0;
+`;
+
+const RankLabel = styled.div`
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  padding-right: var(--spacing-xs);
+`;
+
+const FileLabels = styled.div`
+  display: flex;
+  max-width: 720px;
+  width: 100%;
+  padding: 6px;
+  padding-left: 26px;
+`;
+
+const FileLabel = styled.div`
+  width: 100%;
 `;
 
 const StyledBoard = styled.div`
   display: grid;
   grid-template-columns: repeat(${(p) => p.columns || 1}, 1fr);
-  max-width: 720px;
-  max-height: 720px;
   width: 100%;
   background-color: #111111;
-  gap: 4px;
-  padding: 8px;
+  gap: 2px;
+  padding: 6px;
   aspect-ratio: 1 / 1;
 `;
 
