@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 const GameLog = (props) => {
-  return <Container>GameLog</Container>;
+  const { x, y } = props;
+  return (
+    <Container>
+      {x} and {y}
+    </Container>
+  );
 };
 
 const Container = styled.div`
@@ -9,7 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin-top: 40px;
   min-width: 350px;
   width: 20%;
   min-height: 350px;

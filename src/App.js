@@ -14,12 +14,17 @@ function App() {
   const [lastHadValidMove, setLastHadValidMove] = useState(true);
   const [blackCount, setBlackCount] = useState(0);
   const [whiteCount, setWhiteCount] = useState(0);
+  const [lastClicked, setLastClicked] = useState({});
 
   useEffect(() => {
     const { bCount, wCount } = countPieces(gameState);
     setBlackCount(bCount);
     setWhiteCount(wCount);
   }, [gameState]);
+
+  const getCords = (x, y) => {
+    setLastClicked({ x: x + 1, y: String.fromCharCode(97 + y) });
+  };
 
   return (
     <>
@@ -42,8 +47,9 @@ function App() {
             setPlayer={setPlayer}
             lastHadValidMove={lastHadValidMove}
             setLastHadValidMove={setLastHadValidMove}
+            getCords={getCords}
           />
-          <GameLog />
+          <GameLog x={lastClicked.x} y={lastClicked.y} />
         </FlexWrapper>
       </StyledMain>
     </>

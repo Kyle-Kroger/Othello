@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
 const Gamesquare = (props) => {
-  const { state, possibleMove, x, y, placePiece, player, toFlip, flipPieces } =
-    props;
+  const {
+    state,
+    possibleMove,
+    x,
+    y,
+    placePiece,
+    player,
+    toFlip,
+    flipPieces,
+    getCords,
+  } = props;
 
   const handleClick = () => {
     placePiece(x, y, player);
     flipPieces(player, toFlip);
+    getCords(x, y);
   };
 
   return (

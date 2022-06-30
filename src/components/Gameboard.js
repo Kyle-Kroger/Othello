@@ -11,6 +11,7 @@ const Gameboard = (props) => {
     setPlayer,
     lastHadValidMove,
     setLastHadValidMove,
+    getCords,
   } = props;
 
   //create a game log that explains what happened on each turn
@@ -80,25 +81,46 @@ const Gameboard = (props) => {
     });
   };
 
+  const genRankLabels = (length) => {
+    return [...Array(length)].map((x, i) => {
+      return <RankLabel key={i + 1}>{i + 1}</RankLabel>;
+    });
+  };
+
+  const genFileLabels = (length) => {
+    return [...Array(length)].map((x, i) => {
+      return (
+        <FileLabel key={String.fromCharCode(97 + i)}>
+          {String.fromCharCode(97 + i)}
+        </FileLabel>
+      );
+    });
+  };
+
   return (
     <Container>
-      <StyledBoard columns={gameState.length}>
-        {gameState.map((row, rowI) =>
-          row.map((col, colI) => (
-            <Gamesquare
-              state={col.state}
-              possibleMove={col.possibleMove}
-              toFlip={col.toFlip}
-              x={rowI}
-              y={colI}
-              placePiece={placePiece}
-              flipPieces={flipPieces}
-              player={player}
-              key={`${rowI},${colI}`}
-            />
-          ))
-        )}
-      </StyledBoard>
+      <FileLabels>{genFileLabels(gameState.length)}</FileLabels>
+      <FlexWrapper>
+        <RankLabels>{genRankLabels(gameState.length)}</RankLabels>
+        <StyledBoard columns={gameState.length}>
+          {gameState.map((row, rowI) =>
+            row.map((col, colI) => (
+              <Gamesquare
+                state={col.state}
+                possibleMove={col.possibleMove}
+                toFlip={col.toFlip}
+                x={rowI}
+                y={colI}
+                placePiece={placePiece}
+                flipPieces={flipPieces}
+                player={player}
+                getCords={getCords}
+                key={`${rowI},${colI}`}
+              />
+            ))
+          )}
+        </StyledBoard>
+      </FlexWrapper>
     </Container>
   );
 };
@@ -106,20 +128,48 @@ const Gameboard = (props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 8px;
   margin-left: 0;
   width: 70%;
-  max-width: 720px;
+  max-width: 660px;
+  max-height: 660px;
+  font-size: var(--spacing-lg);
+  text-align: center;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const RankLabels = styled.div`
+  display: flex;
+  flex-direction: column;
   max-height: 720px;
+`;
+
+const RankLabel = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: var(--spacing-xs);
+`;
+
+const FileLabels = styled.div`
+  display: flex;
+  max-width: 720px;
+  width: 100%;
+  padding: 6px;
+`;
+
+const FileLabel = styled.div`
+  width: 100%;
 `;
 
 const StyledBoard = styled.div`
   display: grid;
   grid-template-columns: repeat(${(p) => p.columns || 1}, 1fr);
-  max-width: 720px;
-  max-height: 720px;
   width: 100%;
   background-color: #111111;
   gap: 2px;
