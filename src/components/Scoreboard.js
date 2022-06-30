@@ -5,7 +5,8 @@ const Scoreboard = (props) => {
   return (
     <Container>
       <div>
-        Black: {blackCount} | White: {whiteCount} | {currPlayer}'s turn
+        Black: {blackCount} | White: {whiteCount} |{" "}
+        {currPlayer === "b" ? "Black" : "White"}'s turn
       </div>
     </Container>
   );

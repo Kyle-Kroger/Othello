@@ -23,7 +23,7 @@ function App() {
   }, [gameState]);
 
   const getCords = (x, y) => {
-    setLastClicked({ x: x + 1, y: String.fromCharCode(97 + y) });
+    setLastClicked({ x: x + 1, y: String.fromCharCode(65 + y) });
   };
 
   return (
@@ -49,7 +49,7 @@ function App() {
             setLastHadValidMove={setLastHadValidMove}
             getCords={getCords}
           />
-          <GameLog x={lastClicked.x} y={lastClicked.y} />
+          <GameLog x={lastClicked.x} y={lastClicked.y} currPlayer={player} />
         </FlexWrapper>
       </StyledMain>
     </>
@@ -68,7 +68,9 @@ const Heading = styled.div`
 const FlexWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 72px;
 `;
 
 const StyledMain = styled.main`

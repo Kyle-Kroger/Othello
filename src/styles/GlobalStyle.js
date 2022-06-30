@@ -27,6 +27,11 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
   }
 
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
   :root {
     --shadow-color: 110deg 60% 15%;
     --shadow-elevation-high:

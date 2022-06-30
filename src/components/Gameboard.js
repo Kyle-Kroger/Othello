@@ -91,7 +91,7 @@ const Gameboard = (props) => {
     return [...Array(length)].map((x, i) => {
       return (
         <FileLabel key={String.fromCharCode(97 + i)}>
-          {String.fromCharCode(97 + i)}
+          {String.fromCharCode(65 + i)}
         </FileLabel>
       );
     });
@@ -128,8 +128,7 @@ const Gameboard = (props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 8px;
-  margin-left: 0;
+  margin: 8px 0;
   width: 70%;
   max-width: 660px;
   max-height: 660px;
@@ -146,6 +145,7 @@ const RankLabels = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 720px;
+  padding: 6px 0;
 `;
 
 const RankLabel = styled.div`
@@ -161,6 +161,7 @@ const FileLabels = styled.div`
   max-width: 720px;
   width: 100%;
   padding: 6px;
+  padding-left: 26px;
 `;
 
 const FileLabel = styled.div`
