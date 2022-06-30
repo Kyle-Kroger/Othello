@@ -4,7 +4,18 @@ const variables = css`
   :root {
     /* Colors */
     --color-primary: #348362;
+
+    --color-highlight-100: #dcc2e2;
+    --color-highlight-200: #c69bcf;
+    --color-highlight-300: #af75bb;
+    --color-highlight-400: #9e5bac;
+    --color-highlight-500: #8e459e;
+    --color-highlight-600: #824097;
+    --color-highlight-700: #71398d;
     --color-highlight-800: #623483;
+    --color-highlight-900: #482b6f;
+
+    --color-alt-800: #6a2b6f;
 
     /* Font-size */
     --fz-xs: 0.875rem;

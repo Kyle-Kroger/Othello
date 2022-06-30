@@ -1,10 +1,25 @@
+import styled from "styled-components";
+
 const Scoreboard = (props) => {
   const { whiteCount, blackCount, currPlayer } = props;
   return (
-    <div>
-      Black: {blackCount} | White: {whiteCount} | {currPlayer}'s turn
-    </div>
+    <Container>
+      <div>
+        Black: {blackCount} | White: {whiteCount} | {currPlayer}'s turn
+      </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin: var(--spacing-md) auto;
+  padding: var(--spacing-lg);
+  background-color: var(--color-highlight-900);
+  max-width: 800px;
+  width: 100%;
+  font-size: var(--fz-lg);
+  text-align: center;
+  border-radius: var(--radius-small);
+`;
 
 export default Scoreboard;

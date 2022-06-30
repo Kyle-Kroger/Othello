@@ -24,21 +24,24 @@ function App() {
     <>
       <GlobalStyle />
       <Heading>
-        <h1>Play Othello</h1>
+        <h1>Othello</h1>
+        <StyledButton href="/">New Game</StyledButton>
       </Heading>
-      <Scoreboard
-        blackCount={blackCount}
-        whiteCount={whiteCount}
-        currPlayer={player}
-      />
-      <Gameboard
-        gameState={gameState}
-        setGameState={setGameState}
-        player={player}
-        setPlayer={setPlayer}
-        lastHadValidMove={lastHadValidMove}
-        setLastHadValidMove={setLastHadValidMove}
-      />
+      <StyledMain>
+        <Scoreboard
+          blackCount={blackCount}
+          whiteCount={whiteCount}
+          currPlayer={player}
+        />
+        <Gameboard
+          gameState={gameState}
+          setGameState={setGameState}
+          player={player}
+          setPlayer={setPlayer}
+          lastHadValidMove={lastHadValidMove}
+          setLastHadValidMove={setLastHadValidMove}
+        />
+      </StyledMain>
     </>
   );
 }
@@ -46,12 +49,28 @@ function App() {
 const Heading = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  height: 12vh;
-  background-color: var(--color-highlight-800);
+  padding: var(--spacing-sm) 5vw;
+  background-color: var(--color-alt-800);
 `;
 
-const StyledMain = styled.main``;
+const StyledMain = styled.main`
+  margin: var(--spacing-xs);
+`;
+
+const StyledButton = styled.a`
+  display: inline-block;
+  border: 2px solid var(--color-highlight-300);
+  border-radius: var(--radius-small);
+  padding: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  color: white;
+  text-decoration: none;
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: var(--color-highlight-400);
+  }
+`;
 
 export default App;

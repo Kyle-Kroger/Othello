@@ -118,8 +118,8 @@ const StyledBoard = styled.div`
   max-height: 720px;
   width: 100%;
   background-color: #111111;
-  gap: 4px;
-  padding: 8px;
+  gap: 2px;
+  padding: 6px;
   aspect-ratio: 1 / 1;
 `;
 

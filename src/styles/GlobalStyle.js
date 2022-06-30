@@ -19,7 +19,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 64px;
+    font-size: clamp(
+      2rem,
+      2vw + 1rem,
+      3rem
+    );
     font-weight: bold;
   }
 
