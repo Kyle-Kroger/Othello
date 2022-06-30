@@ -5,6 +5,7 @@ import INITIAL_BOARD from "./lib/initialState";
 import { GlobalStyle } from "./styles";
 import { countPieces } from "./lib/gameLogic";
 import Scoreboard from "./components/Scoreboard";
+import GameLog from "./components/GameLog";
 // import "./App.css";
 
 function App() {
@@ -33,14 +34,17 @@ function App() {
           whiteCount={whiteCount}
           currPlayer={player}
         />
-        <Gameboard
-          gameState={gameState}
-          setGameState={setGameState}
-          player={player}
-          setPlayer={setPlayer}
-          lastHadValidMove={lastHadValidMove}
-          setLastHadValidMove={setLastHadValidMove}
-        />
+        <FlexWrapper>
+          <Gameboard
+            gameState={gameState}
+            setGameState={setGameState}
+            player={player}
+            setPlayer={setPlayer}
+            lastHadValidMove={lastHadValidMove}
+            setLastHadValidMove={setLastHadValidMove}
+          />
+          <GameLog />
+        </FlexWrapper>
       </StyledMain>
     </>
   );
@@ -53,6 +57,12 @@ const Heading = styled.div`
   width: 100%;
   padding: var(--spacing-sm) 5vw;
   background-color: var(--color-alt-800);
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;
 
 const StyledMain = styled.main`

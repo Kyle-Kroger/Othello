@@ -108,7 +108,11 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin: 8px;
+  margin-left: 0;
+  width: 70%;
+  max-width: 720px;
+  max-height: 720px;
 `;
 
 const StyledBoard = styled.div`

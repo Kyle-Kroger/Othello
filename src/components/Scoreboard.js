@@ -13,6 +13,7 @@ const Scoreboard = (props) => {
 
 const Container = styled.div`
   margin: var(--spacing-md) auto;
+  margin-top: var(--spacing-lg);
   padding: var(--spacing-lg);
   background-color: var(--color-highlight-900);
   max-width: 800px;
