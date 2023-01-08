@@ -160,8 +160,8 @@ const FileLabels = styled.div`
   display: flex;
   max-width: 720px;
   width: 100%;
-  padding: 6px;
-  padding-left: 26px;
+  padding: 4px;
+  padding-left: 24px;
 `;
 
 const FileLabel = styled.div`
@@ -174,7 +174,7 @@ const StyledBoard = styled.div`
   width: 100%;
   background-color: #111111;
   gap: 2px;
-  padding: 6px;
+  padding: 4px;
   aspect-ratio: 1 / 1;
 `;
 
