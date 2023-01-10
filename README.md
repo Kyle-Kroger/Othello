@@ -66,7 +66,7 @@ So whenever in the logic of the code a square is flagged as enabled the color of
 
 When I had started this project I had never heard of Memoization before, or if I had I didn't remember about it. I quickly ran into a problem that was causing my code to unlessly loop. I later found out that this was because every time a component renders the functions are rebuilt so are "different" even if the function code would be the same. This caused the app to think that a change had been made and a new render was needed. This new render recreated the function so a "new" change had happened causing another new render. This means an infinite loop had been created.
 
-After some reading and trying to figure out and understand the problem I came across memoization and the useCallback function of react.
+After some reading and trying to figure out and understand the problem I came across memoization and the useCallback function of react. One of the main uses of useCallback is when a useEffect uses a function as a dependency. The hook will return the same function between react renders. As soon as I implemented this into my code I was able to prevent the infinite looping and everything worked as I had intended it to.
 
 ## Optimizations
 
