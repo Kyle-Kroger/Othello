@@ -62,7 +62,7 @@ const Heading = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: var(--spacing-sm) 5vw;
-  background-color: var(--color-alt-800);
+  background-color: var(--color-highlight-900);
 `;
 
 const FlexWrapper = styled.div`
